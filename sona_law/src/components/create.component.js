@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class Create extends Component {
 
@@ -29,19 +30,30 @@ export default class Create extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(`The values are ${this.state.client_name}, ${this.state.case_limitation_date}`)
+
+    const obj = {
+      client_name: this.state.client_name,
+      case_limitation_date: this.state.case_limitation_date
+    };
+    axios.post('http://localhost:4000/case/add', obj)
+      .then(res => console.log(res.data));
+
+    //console.log(`The values are ${this.state.client_name}, ${this.state.case_limitation_date}`)
 
     this.setState({
       client_name: '',
       case_limitation_date: ''
     });
+
+    this.props.history.push('/index');
+
   }
 
 
   render() {
     return (
       <div style={{marginTop:10}}>
-        <h2>add new client.</h2>
+        <h2>add new case.</h2>
         <h5>"why don't you just meet me in the miiiiiiiddleeeee?"</h5>
         <br/>
         <form onSubmit={this.onSubmit}>

@@ -9,7 +9,7 @@ let Case = new Schema({
     type: String
   }
 },{
-  collestion: 'case'
+  collection: 'case'
 });
 
 module.exports = mongoose.model('Case', Case);
